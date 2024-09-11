@@ -13,22 +13,40 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Lista de Rendimentos'),
-        actions: [
-          IconButton(
-            icon: Icon(Icons.add),
-            onPressed: () {
-              Navigator.pushNamed(context, '/rendimento').then((value) {
-                // Atualiza a lista de rendimentos quando retornar da página de rendimento
-                if (value != null) {
-                  setState(() {
-                    rendimentos = List<Map<String, dynamic>>.from(value as List);
-                  });
-                }
-              });
-            },
-          )
-        ],
+        title: Text('Aplicativo de Finanças'),
+      ),
+      drawer: Drawer( // Adicionando o Drawer para navegação
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: <Widget>[
+            DrawerHeader(
+              decoration: BoxDecoration(
+                color: Colors.blue,
+              ),
+              child: Text(
+                'Menu de Navegação',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 24,
+                ),
+              ),
+            ),
+            ListTile(
+              leading: Icon(Icons.attach_money),
+              title: Text('Adicionar Gastos'),
+              onTap: () {
+                Navigator.pushNamed(context, '/gastos');
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.add),
+              title: Text('Adicionar Rendimentos'),
+              onTap: () {
+                Navigator.pushNamed(context, '/rendimento');
+              },
+            ),
+          ],
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -49,7 +67,6 @@ class _HomePageState extends State<HomePage> {
                           '/rendimento',
                           arguments: rendimento,
                         ).then((value) {
-                          // Atualiza a lista de rendimentos quando retornar da página de rendimento
                           if (value != null) {
                             setState(() {
                               rendimentos = List<Map<String, dynamic>>.from(value as List);
