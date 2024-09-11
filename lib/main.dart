@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'pages/home_page.dart';
 import 'pages/rendimento_page.dart';
+import 'pages/gastos_page.dart'; // Importando a nova página
 
 void main() {
   runApp(MyApp());
@@ -17,6 +18,7 @@ class MyApp extends StatelessWidget {
       home: HomePage(), // Página inicial
       routes: {
         '/rendimento': (context) => RendimentoPage(), // Rota para a página de rendimento
+        '/gastos': (context) => GastosPage(),         // Rota para a página de gastos
       },
     );
   }
