@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import './rendimento_page.dart';
 
+
 class HomePage extends StatefulWidget {
   @override
   _HomePageState createState() => _HomePageState();
@@ -36,6 +37,13 @@ class _HomePageState extends State<HomePage> {
               title: Text('Adicionar Gastos'),
               onTap: () {
                 Navigator.pushNamed(context, '/gastos');
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.list),
+              title: Text('Lista de Gastos'),
+              onTap: () {
+                Navigator.pushNamed(context, '/listagastos');
               },
             ),
             ListTile(
