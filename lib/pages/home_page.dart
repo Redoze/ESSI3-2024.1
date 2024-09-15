@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import './rendimento_page.dart';
-
 
 class HomePage extends StatefulWidget {
   @override
@@ -14,21 +12,44 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Aplicativo de Finanças'),
+        title: Text(
+          'Finanças',
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            fontSize: 24,
+            fontWeight: FontWeight.bold,
+            color: const Color.fromARGB(255, 0, 0, 0),
+          ),
+        ),
+        centerTitle: true, // Centraliza o título na AppBar
       ),
-      drawer: Drawer( // Adicionando o Drawer para navegação
+      drawer: Drawer(
         child: ListView(
           padding: EdgeInsets.zero,
           children: <Widget>[
             DrawerHeader(
               decoration: BoxDecoration(
-                color: Colors.blue,
+                color: Colors.blueAccent,
               ),
-              child: Text(
-                'Menu de Navegação',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 24,
+              child: Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    CircleAvatar(
+                      radius: 30,
+                      backgroundColor: const Color.fromARGB(255, 255, 255, 255),
+                      child: Icon(Icons.person, size: 40, color: Colors.blueAccent),
+                    ),
+                    SizedBox(height: 10),
+                    Text(
+                      'Bem-vindo, Usuário!',
+                      style: TextStyle(
+                        color: const Color.fromARGB(255, 255, 255, 255),
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ),
@@ -59,29 +80,48 @@ class _HomePageState extends State<HomePage> {
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: rendimentos.isEmpty
-            ? Center(child: Text('Nenhum rendimento cadastrado'))
+            ? Center(
+                child: Text(
+                  'Seja bem-vindo ao aplicativo de Finanças!',
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              )
             : ListView.builder(
                 itemCount: rendimentos.length,
                 itemBuilder: (context, index) {
                   final rendimento = rendimentos[index];
-                  return ListTile(
-                    title: Text(rendimento['fonte']),
-                    subtitle: Text('Valor: R\$ ${rendimento['valor'].toStringAsFixed(2)}'),
-                    trailing: IconButton(
-                      icon: Icon(Icons.edit),
-                      onPressed: () {
-                        Navigator.pushNamed(
-                          context,
-                          '/rendimento',
-                          arguments: rendimento,
-                        ).then((value) {
-                          if (value != null) {
-                            setState(() {
-                              rendimentos = List<Map<String, dynamic>>.from(value as List);
-                            });
-                          }
-                        });
-                      },
+                  return Card(
+                    margin: EdgeInsets.symmetric(vertical: 8),
+                    elevation: 5,
+                    child: ListTile(
+                      contentPadding: EdgeInsets.all(16),
+                      title: Text(
+                        rendimento['fonte'],
+                        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                      ),
+                      subtitle: Text(
+                        'Valor: R\$ ${rendimento['valor'].toStringAsFixed(2)}',
+                        style: TextStyle(fontSize: 16),
+                      ),
+                      trailing: IconButton(
+                        icon: Icon(Icons.edit),
+                        onPressed: () {
+                          Navigator.pushNamed(
+                            context,
+                            '/rendimento',
+                            arguments: rendimento,
+                          ).then((value) {
+                            if (value != null) {
+                              setState(() {
+                                rendimentos = List<Map<String, dynamic>>.from(value as List);
+                              });
+                            }
+                          });
+                        },
+                      ),
                     ),
                   );
                 },
