@@ -69,7 +69,7 @@ class _HomePageState extends State<HomePage> {
             ),
             ListTile(
               leading: Icon(Icons.add),
-              title: Text('Adicionar Rendimentos'),
+              title: Text('Gerenciar Rendimentos'),
               onTap: () {
                 Navigator.pushNamed(context, '/rendimento');
               },
